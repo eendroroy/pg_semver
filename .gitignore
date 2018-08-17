@@ -1,0 +1,8 @@
+*.o
+*.so
+.vagrant
+*.log
+
+test/regression.diffs
+test/regression.out
+test/results
