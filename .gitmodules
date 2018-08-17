@@ -1,0 +1,3 @@
+[submodule "semver.c"]
+	path = semver.c
+	url = https://github.com/h2non/semver.c
