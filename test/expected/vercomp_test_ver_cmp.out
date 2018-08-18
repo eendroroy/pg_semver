@@ -41,3 +41,15 @@ SELECT VER_CMP('1.0.0-rc1'::VER, '1.0.0'::VER);
       -1
 (1 row)
 
+SELECT VER_CMP('1.0.0-rc1*'::VER, '1.0.0'::VER);
+ERROR:  Invalid Version 1.0.0-rc1*.
+LINE 1: SELECT VER_CMP('1.0.0-rc1*'::VER, '1.0.0'::VER);
+                       ^
+SELECT VER_CMP('1.0.0-rc@1'::VER, '1.0.0'::VER);
+ERROR:  Invalid Version 1.0.0-rc@1.
+LINE 1: SELECT VER_CMP('1.0.0-rc@1'::VER, '1.0.0'::VER);
+                       ^
+SELECT VER_CMP('1.0.0-rc#1'::VER, '1.0.0'::VER);
+ERROR:  Invalid Version 1.0.0-rc#1.
+LINE 1: SELECT VER_CMP('1.0.0-rc#1'::VER, '1.0.0'::VER);
+                       ^

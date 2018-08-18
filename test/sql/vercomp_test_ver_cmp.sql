@@ -8,3 +8,7 @@ SELECT VER_CMP('1.0.0-alpha1'::VER, '1.0.0-alpha0'::VER);
 SELECT VER_CMP('1.0.0-alpha1'::VER, '1.0.0-alpha2'::VER);
 SELECT VER_CMP('1.0.0-alpha1'::VER, '1.0.0-beta2'::VER);
 SELECT VER_CMP('1.0.0-rc1'::VER, '1.0.0'::VER);
+
+SELECT VER_CMP('1.0.0-rc1*'::VER, '1.0.0'::VER);
+SELECT VER_CMP('1.0.0-rc@1'::VER, '1.0.0'::VER);
+SELECT VER_CMP('1.0.0-rc#1'::VER, '1.0.0'::VER);
