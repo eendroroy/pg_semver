@@ -9,9 +9,9 @@
 
 PG_MODULE_MAGIC;
 
-bool ver_op(char* v1, char* v2, char* operator);
+bool ver_op(char *v1, char *v2, char *operator);
 
-bool ver_op(char* v1, char* v2, char* operator) {
+bool ver_op(char *v1, char *v2, char *operator) {
     bool resolution;
     semver_t v_1 = {};
     semver_t v_2 = {};
@@ -27,8 +27,8 @@ bool ver_op(char* v1, char* v2, char* operator) {
 PG_FUNCTION_INFO_V1(ver_in);
 Datum ver_in(PG_FUNCTION_ARGS) {
     char vc[1000];
-    char* v1 = PG_GETARG_CSTRING(0);
-    text* t = cstring_to_text(v1);
+    char *v1 = PG_GETARG_CSTRING(0);
+    text *t = cstring_to_text(v1);
     if (!semver_is_valid(v1)) {
         strcpy(vc, v1);
         semver_clean(vc);
