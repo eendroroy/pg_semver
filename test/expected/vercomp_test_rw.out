@@ -13,3 +13,4 @@ SELECT * FROM ver_test;
  3.0.0
 (7 rows)
 
+DROP TABLE IF EXISTS ver_test;
