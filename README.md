@@ -10,7 +10,7 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/pulls)
 [![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/pulls?q=is%3Apr+is%3Aclosed)
 
-**`Version`** Data type for postgresql. It enables `Version` to inserted into table as data type (`CREATE TABLE ver_test(version VER);`) and allows all standard operations (`=`, `>`, `>=`, `<>`, `<`, `<=` etc.).
+**`Version`** Data type (`VER`) for postgresql. It enables `Version` to be inserted into tables as data type (`CREATE TABLE ver_test(version VER);`) and allows all standard operations (`=`, `>`, `>=`, `<>`, `<`, `<=` etc.).
 
 ## Example
 
@@ -45,7 +45,7 @@ SELECT * FROM ver_test WHERE version > '2.9-beta1'::VER;
 
 ```
 
-**2 version can be also compared without innserting innto any table:**
+**2 version can be also compared without inserting into any table:**
 
 ```sql
 
@@ -71,7 +71,7 @@ SELECT VER_CMP('0.0.2'::VER, '0.0.1'::VER);
 
 ## Installing by compiling source code
 
-**Prerequisit**
+**Prerequisites**
 
 `Ubuntu`:
 
@@ -103,7 +103,7 @@ yum -y install postgresql10-server postgresql10-libs postgresql10-devel postgres
 /usr/pgsql-10/bin/postgresql-10-setup initdb
 ```
 
-To build it, just do this:
+**Build**
 
 ```bash
 make
