@@ -3,7 +3,7 @@ MODULE_big = vercomp
 OBJS = vercomp.o $(WIN32RES)
 PGFILEDESC = "vercomp - strengthen user password checks"
 
-DATA = vercomp--0.0.1.sql
+DATA = vercomp--0.0.2.sql
 
 REGRESS_OPTS  = --inputdir=test --outputdir=test --load-extension=vercomp --user=postgres
 REGRESS = vercomp_test
