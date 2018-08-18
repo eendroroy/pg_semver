@@ -18,8 +18,30 @@ Datum ver_in(PG_FUNCTION_ARGS)
 PG_FUNCTION_INFO_V1(ver_out);
 Datum ver_out(PG_FUNCTION_ARGS)
 {
-	char* v1 ;
-	text* t = PG_GETARG_TEXT_PP(0);
+	char *v1 ;
+	text *t = PG_GETARG_TEXT_PP(0);
     v1 = text_to_cstring(t);
     PG_RETURN_CSTRING(v1);
+}
+
+PG_FUNCTION_INFO_V1(ver_cmp);
+Datum ver_cmp(PG_FUNCTION_ARGS)
+{
+	int resolution;
+	char *v1, *v2;
+	semver_t v_1 = {};
+	semver_t v_2 = {};
+	text *t1 = PG_GETARG_TEXT_PP(0);
+	text *t2 = PG_GETARG_TEXT_PP(1);
+	
+    v1 = text_to_cstring(t1);
+    v2 = text_to_cstring(t2);
+	
+    semver_parse(v1, &v_1);
+    semver_parse(v2, &v_2);
+	resolution = semver_compare(v_1, v_2);
+	semver_free(&v_1);
+	semver_free(&v_2);
+	
+    PG_RETURN_INT32((int32)resolution);
 }
