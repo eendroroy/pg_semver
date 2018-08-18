@@ -21,32 +21,32 @@ INSERT INTO ver_test VALUES ('0.0.1-rc');
 INSERT INTO ver_test VALUES ('0.0.1-rc.0');
 INSERT INTO ver_test VALUES ('0.0.1-rc.0.1');
 INSERT INTO ver_test VALUES ('!0');
-ERROR:  Invalid Version !0.
+ERROR:  Invalid Version '!0'. Did you mean '0'
 LINE 1: INSERT INTO ver_test VALUES ('!0');
                                      ^
 INSERT INTO ver_test VALUES ('@0.0');
-ERROR:  Invalid Version @0.0.
+ERROR:  Invalid Version '@0.0'. Did you mean '0.0'
 LINE 1: INSERT INTO ver_test VALUES ('@0.0');
                                      ^
 INSERT INTO ver_test VALUES ('0.#1');
-ERROR:  Invalid Version 0.#1.
+ERROR:  Invalid Version '0.#1'. Did you mean '0.1'
 LINE 1: INSERT INTO ver_test VALUES ('0.#1');
                                      ^
 INSERT INTO ver_test VALUES ('0.0.%0');
-ERROR:  Invalid Version 0.0.%0.
+ERROR:  Invalid Version '0.0.%0'. Did you mean '0.0.0'
 LINE 1: INSERT INTO ver_test VALUES ('0.0.%0');
                                      ^
 INSERT INTO ver_test VALUES ('0.0.1');
 INSERT INTO ver_test VALUES ('0.0^.1-a');
-ERROR:  Invalid Version 0.0^.1-a.
+ERROR:  Invalid Version '0.0^.1-a'. Did you mean '0.0.1-a'
 LINE 1: INSERT INTO ver_test VALUES ('0.0^.1-a');
                                      ^
 INSERT INTO ver_test VALUES ('0.&0.1-alpha');
-ERROR:  Invalid Version 0.&0.1-alpha.
+ERROR:  Invalid Version '0.&0.1-alpha'. Did you mean '0.0.1-alpha'
 LINE 1: INSERT INTO ver_test VALUES ('0.&0.1-alpha');
                                      ^
 INSERT INTO ver_test VALUES ('0.0.*1-a.0');
-ERROR:  Invalid Version 0.0.*1-a.0.
+ERROR:  Invalid Version '0.0.*1-a.0'. Did you mean '0.0.1-a.0'
 LINE 1: INSERT INTO ver_test VALUES ('0.0.*1-a.0');
                                      ^
 SELECT * FROM ver_test;
