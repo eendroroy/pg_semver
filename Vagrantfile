@@ -56,6 +56,6 @@ Vagrant.configure("2") do |config|
     sudo PATH="/usr/pgsql-10/bin:$PATH" make
     sudo PATH="/usr/pgsql-10/bin:$PATH" make install
     sudo PATH="/usr/pgsql-10/bin:$PATH" make installcheck
-    rm vercomp.o vercomp.so
+    sudo PATH="/usr/pgsql-10/bin:$PATH" make clean
   SHELL
 end
