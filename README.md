@@ -10,6 +10,63 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/pulls)
 [![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/pulls?q=is%3Apr+is%3Aclosed)
 
+## Example
+
+```sql
+
+CREATE TABLE ver_test(version VER);
+
+INSERT INTO ver_test VALUES ('0.0.0'), ('1.0.0'), ('2.0.0-beta1'), ('2.0.0-rc1'),('2.10.0-beta0'), ('2.2.0-alpha'),  ('3.0.0');
+
+SELECT * FROM ver_test WHERE version = '1.0.0'::VER;
+ version 
+---------
+ 1.0.0
+(1 row)
+
+SELECT * FROM ver_test WHERE version >  '2.0.0-alpha'::VER;
+   version    
+--------------
+ 2.0.0-beta1
+ 2.0.0-rc1
+ 2.10.0-beta0
+ 2.2.0-alpha
+ 3.0.0
+(5 rows)
+
+SELECT * FROM ver_test WHERE version > '2.9-beta1'::VER;
+   version    
+--------------
+ 2.10.0-beta0
+ 3.0.0
+(2 rows)
+
+```
+
+**2 version can be also compared without innserting innto any table:**
+
+```sql
+
+SELECT VER_CMP('0.0.0'::VER, '0.0.1'::VER);
+ ver_cmp 
+---------
+      -1
+(1 row)
+
+SELECT VER_CMP('0.0.1'::VER, '0.0.1'::VER);
+ ver_cmp 
+---------
+       0
+(1 row)
+
+SELECT VER_CMP('0.0.2'::VER, '0.0.1'::VER);
+ ver_cmp 
+---------
+       1
+(1 row)
+
+```
+
 ## Installing by compiling source code
 
 **Prerequisit**
