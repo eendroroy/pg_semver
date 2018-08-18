@@ -10,6 +10,8 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/pulls)
 [![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/pulls?q=is%3Apr+is%3Aclosed)
 
+**`Version`** Data type for postgresql. It enables `Version` to inserted innto table as data type (`CREATE TABLE ver_test(version VER);`) and allows all standard operations (`=`, `>`, `>=`, `<>`, `<`, `<=` etc.).
+
 ## Example
 
 ```sql
