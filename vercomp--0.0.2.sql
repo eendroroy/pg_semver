@@ -84,14 +84,14 @@ CREATE OPERATOR >= (
 CREATE OPERATOR CLASS btree_ver_ops
 DEFAULT FOR TYPE ver USING btree
 AS
-        OPERATOR        1       <  ,
-        OPERATOR        2       <= ,
-        OPERATOR        3       =  ,
-        OPERATOR        4       >= ,
-        OPERATOR        5       >  ,
-        FUNCTION        1       ver_cmp(ver, ver);
+  OPERATOR  1  <  ,
+  OPERATOR  2  <= ,
+  OPERATOR  3  =  ,
+  OPERATOR  4  >= ,
+  OPERATOR  5  >  ,
+  FUNCTION  1  ver_cmp(ver, ver);
 
 CREATE OPERATOR CLASS hash_ver_ops
-    DEFAULT FOR TYPE ver USING hash AS
-        OPERATOR        1       = ,
-        FUNCTION        1       hash_ver(ver);
+  DEFAULT FOR TYPE ver USING hash AS
+    OPERATOR  1  = ,
+    FUNCTION  1  hash_ver(ver);
