@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
     
     centos.vm.network "private_network", ip: "192.168.33.10"
 
-    centos.vm.provision "bootstrap", type: "shell", run: 'never', inline: <<-SHELL
+    centos.vm.provision "bootstrap", type: "shell", inline: <<-SHELL
       yum --enablerepo=updates clean metadata
       yum -y update
       yum -y install openssl-devel
