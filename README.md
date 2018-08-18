@@ -98,12 +98,6 @@ vagrant up
 vagrant provision --provision-with install
 ```
 
-## More information
-
-For more details, please read the manual of the original module:
-
-[https://www.postgresql.org/docs/current/static/passwordcheck.html](https://www.postgresql.org/docs/current/static/passwordcheck.html)
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at [vercomp](https://github.com/eendroroy/vercomp) repository.
