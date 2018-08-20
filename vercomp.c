@@ -165,6 +165,34 @@ Datum version_bump(PG_FUNCTION_ARGS) {
 
     PG_RETURN_CSTRING(cstring_to_text(v2));
 }
+PG_FUNCTION_INFO_V1(version_to_int);
+Datum version_to_int(PG_FUNCTION_ARGS) {
+    int numeric;
+    char *v1, vc[1000];
+    semver_t v_1 = {};
+    text *t1 = PG_GETARG_TEXT_PP(0);
+
+    v1 = text_to_cstring(t1);
+
+    if (!semver_is_valid(v1)) {
+        strcpy(vc, v1);
+        semver_clean(vc);
+        ereport(ERROR,
+            (
+                errcode(ERRCODE_INVALID_PARAMETER_VALUE),
+                errmsg(ERR_INVALID_VERSION , v1),
+                errdetail(ERR_INVALID_VERSION_MSG, v1),
+                errhint(ERR_INVALID_VERSION_HINT, vc)
+            )
+        );
+    }
+
+    semver_parse(v1, &v_1);
+    numeric = semver_numeric(&v_1);
+    semver_free(&v_1);
+
+    PG_RETURN_INT32((int32)numeric);
+}
 
 PG_FUNCTION_INFO_V1(version_eq);
 Datum version_eq(PG_FUNCTION_ARGS) {
