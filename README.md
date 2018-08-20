@@ -11,6 +11,7 @@
 [![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/pulls?q=is%3Apr+is%3Aclosed)
 
 **`Version`** Data type (`VERSION`) for postgresql.
+
 It enables `Version` to be inserted into tables as data type (`CREATE TABLE versions(version VERSION);`)
 and allows all standard operations (`=`, `>`, `>=`, `<>`, `<`, `<=` etc.).
 
