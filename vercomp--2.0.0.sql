@@ -88,7 +88,7 @@ CREATE OPERATOR ~ (
   RIGHTARG = version,
   PROCEDURE = version_sat,
   COMMUTATOR = ~ ,
-  NEGATOR = ~! ,
+  NEGATOR = !~ ,
   RESTRICT = scalargtsel,
   JOIN = scalargtjoinsel
 );
