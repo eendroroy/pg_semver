@@ -28,104 +28,53 @@ CREATE FUNCTION version_ncar(version, version) RETURNS boolean AS '$libdir/verco
 CREATE FUNCTION hash_ver(version) RETURNS int LANGUAGE internal IMMUTABLE AS 'hashtext';
 
 CREATE OPERATOR = (
-  LEFTARG = version,
-  RIGHTARG = version,
-  PROCEDURE = version_eq,
-  COMMUTATOR = '=',
-  NEGATOR = '<>',
-  RESTRICT = eqsel,
-  JOIN = eqjoinsel,
-  HASHES, MERGES
+  LEFTARG = version, RIGHTARG = version, PROCEDURE = version_eq,   COMMUTATOR = '=',  NEGATOR = '<>',
+  RESTRICT = eqsel, JOIN = eqjoinsel, HASHES, MERGES
 );
 
 CREATE OPERATOR <> (
-  LEFTARG = version,
-  RIGHTARG = version,
-  PROCEDURE = version_ne,
-  COMMUTATOR = '<>',
-  NEGATOR = '=',
-  RESTRICT = neqsel,
-  JOIN = neqjoinsel
+  LEFTARG = version, RIGHTARG = version, PROCEDURE = version_ne,   COMMUTATOR = '<>', NEGATOR = '=',
+  RESTRICT = neqsel, JOIN = neqjoinsel
 );
 
 CREATE OPERATOR < (
-  LEFTARG = version,
-  RIGHTARG = version,
-  PROCEDURE = version_lt,
-  COMMUTATOR = > ,
-  NEGATOR = >= ,
-  RESTRICT = scalarltsel,
-  JOIN = scalarltjoinsel
+  LEFTARG = version, RIGHTARG = version, PROCEDURE = version_lt,   COMMUTATOR = > ,   NEGATOR = >= ,
+  RESTRICT = scalarltsel, JOIN = scalarltjoinsel
 );
 
 CREATE OPERATOR <= (
-  LEFTARG = version,
-  RIGHTARG = version,
-  PROCEDURE = version_le,
-  COMMUTATOR = >= ,
-  NEGATOR = > ,
-  RESTRICT = scalarltsel,
-  JOIN = scalarltjoinsel
+  LEFTARG = version, RIGHTARG = version, PROCEDURE = version_le,   COMMUTATOR = >= ,  NEGATOR = > ,
+  RESTRICT = scalarltsel, JOIN = scalarltjoinsel
 );
 
 CREATE OPERATOR > (
-  LEFTARG = version,
-  RIGHTARG = version,
-  PROCEDURE = version_gt,
-  COMMUTATOR = < ,
-  NEGATOR = <= ,
-  RESTRICT = scalargtsel,
-  JOIN = scalargtjoinsel
+  LEFTARG = version, RIGHTARG = version, PROCEDURE = version_gt,   COMMUTATOR = < ,   NEGATOR = <= ,
+  RESTRICT = scalargtsel, JOIN = scalargtjoinsel
 );
 
 CREATE OPERATOR >= (
-  LEFTARG = version,
-  RIGHTARG = version,
-  PROCEDURE = version_ge,
-  COMMUTATOR = <= ,
-  NEGATOR = < ,
-  RESTRICT = scalargtsel,
-  JOIN = scalargtjoinsel
+  LEFTARG = version, RIGHTARG = version, PROCEDURE = version_ge,   COMMUTATOR = <= ,  NEGATOR = < ,
+  RESTRICT = scalargtsel, JOIN = scalargtjoinsel
 );
 
 CREATE OPERATOR ~ (
-  LEFTARG = version,
-  RIGHTARG = version,
-  PROCEDURE = version_sat,
-  COMMUTATOR = ~ ,
-  NEGATOR = !~ ,
-  RESTRICT = scalargtsel,
-  JOIN = scalargtjoinsel
+  LEFTARG = version, RIGHTARG = version, PROCEDURE = version_sat,  COMMUTATOR = ~ ,   NEGATOR = !~ ,
+  RESTRICT = scalargtsel, JOIN = scalargtjoinsel
 );
 
 CREATE OPERATOR !~ (
-  LEFTARG = version,
-  RIGHTARG = version,
-  PROCEDURE = version_nsat,
-  COMMUTATOR = !~ ,
-  NEGATOR = ~ ,
-  RESTRICT = scalargtsel,
-  JOIN = scalargtjoinsel
+  LEFTARG = version, RIGHTARG = version, PROCEDURE = version_nsat, COMMUTATOR = !~ ,  NEGATOR = ~ ,
+  RESTRICT = scalargtsel, JOIN = scalargtjoinsel
 );
 
 CREATE OPERATOR ^ (
-  LEFTARG = version,
-  RIGHTARG = version,
-  PROCEDURE = version_car,
-  COMMUTATOR = ^ ,
-  NEGATOR = !^ ,
-  RESTRICT = scalargtsel,
-  JOIN = scalargtjoinsel
+  LEFTARG = version, RIGHTARG = version, PROCEDURE = version_car,  COMMUTATOR = ^ ,   NEGATOR = !^ ,
+  RESTRICT = scalargtsel, JOIN = scalargtjoinsel
 );
 
 CREATE OPERATOR !^ (
-  LEFTARG = version,
-  RIGHTARG = version,
-  PROCEDURE = version_ncar,
-  COMMUTATOR = !^ ,
-  NEGATOR = ^ ,
-  RESTRICT = scalargtsel,
-  JOIN = scalargtjoinsel
+  LEFTARG = version, RIGHTARG = version, PROCEDURE = version_ncar, COMMUTATOR = !^ ,  NEGATOR = ^ ,
+  RESTRICT = scalargtsel, JOIN = scalargtjoinsel
 );
 
 CREATE OPERATOR CLASS btree_ver_ops
