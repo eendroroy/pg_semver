@@ -1,29 +1,29 @@
 CREATE TYPE version;
 
-CREATE FUNCTION ver_in(cstring)  RETURNS version AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
-CREATE FUNCTION ver_out(version) RETURNS cstring AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_in(cstring)  RETURNS version AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_out(version) RETURNS cstring AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
 
-CREATE TYPE version (INPUT = ver_in, OUTPUT = ver_out, LIKE = TEXT);
+CREATE TYPE version (INPUT = version_in, OUTPUT = version_out, LIKE = TEXT);
 
 CREATE CAST (text as version) WITHOUT FUNCTION AS IMPLICIT;
 CREATE CAST (version as text) WITHOUT FUNCTION AS IMPLICIT;
 
-CREATE FUNCTION ver_cmp(version, version) RETURNS int AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_cmp(version, version) RETURNS int AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
 
 
-CREATE FUNCTION ver_eq(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
-CREATE FUNCTION ver_ne(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
-CREATE FUNCTION ver_lt(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
-CREATE FUNCTION ver_le(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
-CREATE FUNCTION ver_gt(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
-CREATE FUNCTION ver_ge(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_eq(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_ne(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_lt(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_le(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_gt(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_ge(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
 
 CREATE FUNCTION hash_ver(version) RETURNS int LANGUAGE internal IMMUTABLE AS 'hashtext';
 
 CREATE OPERATOR = (
   LEFTARG = version,
   RIGHTARG = version,
-  PROCEDURE = ver_eq,
+  PROCEDURE = version_eq,
   COMMUTATOR = '=',
   NEGATOR = '<>',
   RESTRICT = eqsel,
@@ -34,7 +34,7 @@ CREATE OPERATOR = (
 CREATE OPERATOR <> (
   LEFTARG = version,
   RIGHTARG = version,
-  PROCEDURE = ver_ne,
+  PROCEDURE = version_ne,
   COMMUTATOR = '<>',
   NEGATOR = '=',
   RESTRICT = neqsel,
@@ -44,7 +44,7 @@ CREATE OPERATOR <> (
 CREATE OPERATOR < (
   LEFTARG = version,
   RIGHTARG = version,
-  PROCEDURE = ver_lt,
+  PROCEDURE = version_lt,
   COMMUTATOR = > ,
   NEGATOR = >= ,
   RESTRICT = scalarltsel,
@@ -54,7 +54,7 @@ CREATE OPERATOR < (
 CREATE OPERATOR <= (
   LEFTARG = version,
   RIGHTARG = version,
-  PROCEDURE = ver_le,
+  PROCEDURE = version_le,
   COMMUTATOR = >= ,
   NEGATOR = > ,
   RESTRICT = scalarltsel,
@@ -64,7 +64,7 @@ CREATE OPERATOR <= (
 CREATE OPERATOR > (
   LEFTARG = version,
   RIGHTARG = version,
-  PROCEDURE = ver_gt,
+  PROCEDURE = version_gt,
   COMMUTATOR = < ,
   NEGATOR = <= ,
   RESTRICT = scalargtsel,
@@ -74,7 +74,7 @@ CREATE OPERATOR > (
 CREATE OPERATOR >= (
   LEFTARG = version,
   RIGHTARG = version,
-  PROCEDURE = ver_ge,
+  PROCEDURE = version_ge,
   COMMUTATOR = <= ,
   NEGATOR = < ,
   RESTRICT = scalargtsel,
@@ -89,7 +89,7 @@ AS
   OPERATOR  3  =  ,
   OPERATOR  4  >= ,
   OPERATOR  5  >  ,
-  FUNCTION  1  ver_cmp(version, version);
+  FUNCTION  1  version_cmp(version, version);
 
 CREATE OPERATOR CLASS hash_ver_ops
   DEFAULT FOR TYPE version USING hash AS

@@ -55,20 +55,20 @@ SELECT * FROM versions ORDER BY version DESC;
  0.0.0
 (7 rows)
 
-SELECT VER_CMP('0.0.0', '0.0.1');
- ver_cmp 
+SELECT VERSION_CMP('0.0.0', '0.0.1');
+ version_cmp 
 ---------
       -1
 (1 row)
 
-SELECT VER_CMP('0.0.1', '0.0.1');
- ver_cmp 
+SELECT VERSION_CMP('0.0.1', '0.0.1');
+ version_cmp 
 ---------
        0
 (1 row)
 
-SELECT VER_CMP('0.0.2', '0.0.1');
- ver_cmp 
+SELECT VERSION_CMP('0.0.2', '0.0.1');
+ version_cmp 
 ---------
        1
 (1 row)
@@ -79,20 +79,20 @@ SELECT VER_CMP('0.0.2', '0.0.1');
 
 ```sql
 
-SELECT VER_CMP('0.0.0', '0.0.1');
- ver_cmp 
+SELECT VERSION_CMP('0.0.0', '0.0.1');
+ version_cmp 
 ---------
       -1
 (1 row)
 
-SELECT VER_CMP('0.0.1', '0.0.1');
- ver_cmp 
+SELECT VERSION_CMP('0.0.1', '0.0.1');
+ version_cmp 
 ---------
        0
 (1 row)
 
-SELECT VER_CMP('0.0.2', '0.0.1');
- ver_cmp 
+SELECT VERSION_CMP('0.0.2', '0.0.1');
+ version_cmp 
 ---------
        1
 (1 row)
