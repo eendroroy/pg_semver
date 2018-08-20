@@ -10,23 +10,23 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/pulls)
 [![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/pulls?q=is%3Apr+is%3Aclosed)
 
-**`Version`** Data type (`VER`) for postgresql. It enables `Version` to be inserted into tables as data type (`CREATE TABLE ver_test(version VER);`) and allows all standard operations (`=`, `>`, `>=`, `<>`, `<`, `<=` etc.).
+**`Version`** Data type (`VERSION`) for postgresql. It enables `Version` to be inserted into tables as data type (`CREATE TABLE versions(version VERSION);`) and allows all standard operations (`=`, `>`, `>=`, `<>`, `<`, `<=` etc.).
 
 ## Example
 
 ```sql
 
-CREATE TABLE ver_test(version VER);
+CREATE TABLE versions(version VERSION);
 
-INSERT INTO ver_test VALUES ('0.0.0'), ('1.0.0'), ('2.0.0-beta1'), ('2.0.0-rc1'),('2.10.0-beta0'), ('2.2.0-alpha'),  ('3.0.0');
+INSERT INTO versions VALUES ('0.0.0'), ('1.0.0'), ('2.0.0-beta1'), ('2.0.0-rc1'),('2.10.0-beta0'), ('2.2.0-alpha'),  ('3.0.0');
 
-SELECT * FROM ver_test WHERE version = '1.0.0'::VER;
+SELECT * FROM versions WHERE version = '1.0.0';
  version 
 ---------
  1.0.0
 (1 row)
 
-SELECT * FROM ver_test WHERE version >  '2.0.0-alpha'::VER;
+SELECT * FROM versions WHERE version >  '2.0.0-alpha';
    version    
 --------------
  2.0.0-beta1
@@ -36,12 +36,42 @@ SELECT * FROM ver_test WHERE version >  '2.0.0-alpha'::VER;
  3.0.0
 (5 rows)
 
-SELECT * FROM ver_test WHERE version > '2.9-beta1'::VER;
+SELECT * FROM versions WHERE version > '2.9-beta1';
    version    
 --------------
  2.10.0-beta0
  3.0.0
 (2 rows)
+
+SELECT * FROM versions ORDER BY version DESC;
+   version   
+-------------
+ 3.0.0
+ 2.0.0-rc1
+ 2.0.0-beta1
+ 2.0.0-beta0
+ 2.0.0-alpha
+ 1.0.0
+ 0.0.0
+(7 rows)
+
+SELECT VER_CMP('0.0.0', '0.0.1');
+ ver_cmp 
+---------
+      -1
+(1 row)
+
+SELECT VER_CMP('0.0.1', '0.0.1');
+ ver_cmp 
+---------
+       0
+(1 row)
+
+SELECT VER_CMP('0.0.2', '0.0.1');
+ ver_cmp 
+---------
+       1
+(1 row)
 
 ```
 
@@ -49,19 +79,19 @@ SELECT * FROM ver_test WHERE version > '2.9-beta1'::VER;
 
 ```sql
 
-SELECT VER_CMP('0.0.0'::VER, '0.0.1'::VER);
+SELECT VER_CMP('0.0.0', '0.0.1');
  ver_cmp 
 ---------
       -1
 (1 row)
 
-SELECT VER_CMP('0.0.1'::VER, '0.0.1'::VER);
+SELECT VER_CMP('0.0.1', '0.0.1');
  ver_cmp 
 ---------
        0
 (1 row)
 
-SELECT VER_CMP('0.0.2'::VER, '0.0.1'::VER);
+SELECT VER_CMP('0.0.2', '0.0.1');
  ver_cmp 
 ---------
        1

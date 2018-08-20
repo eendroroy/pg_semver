@@ -1,8 +1,8 @@
 LOAD 'vercomp';
-CREATE TABLE ver_test(version VER);
-INSERT INTO ver_test VALUES ('1.0.0'), ('0.0.0'), ('2.5.0-beta1'), ('2.0.0-rc1'),('2.10.0-beta0'), ('20.2.0-alpha'),
+CREATE TABLE versions(version VERSION);
+INSERT INTO versions VALUES ('1.0.0'), ('0.0.0'), ('2.5.0-beta1'), ('2.0.0-rc1'),('2.10.0-beta0'), ('20.2.0-alpha'),
                             ('30.0.0'),  ('3.0.0'),  ('3.0.0-rc.2'),  ('3.0.0-rc.0'),  ('3.0.0-b.2'),  ('3.0.0-a.0');
-SELECT * FROM ver_test;
+SELECT * FROM versions;
    version    
 --------------
  1.0.0
@@ -19,7 +19,7 @@ SELECT * FROM ver_test;
  3.0.0-a.0
 (12 rows)
 
-SELECT * FROM ver_test ORDER BY version;
+SELECT * FROM versions ORDER BY version;
    version    
 --------------
  0.0.0
@@ -36,7 +36,7 @@ SELECT * FROM ver_test ORDER BY version;
  30.0.0
 (12 rows)
 
-SELECT * FROM ver_test ORDER BY version DESC;
+SELECT * FROM versions ORDER BY version DESC;
    version    
 --------------
  30.0.0
@@ -53,4 +53,4 @@ SELECT * FROM ver_test ORDER BY version DESC;
  0.0.0
 (12 rows)
 
-DROP TABLE IF EXISTS ver_test;
+DROP TABLE IF EXISTS versions;
