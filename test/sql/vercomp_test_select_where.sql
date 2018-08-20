@@ -6,16 +6,27 @@ INSERT INTO versions VALUES ('1.0.0'), ('0.0.0'), ('2.5.0-beta1'), ('2.0.0-rc1')
                             ('30.0.0'), ('3.0.0'), ('3.0.0-rc2'), ('3.0.0-rc0'), ('3.0.0-beta2'), ('3.0.0-alpha0');
 
 SELECT * FROM versions WHERE version =  '1.0.0';
-SELECT * FROM versions WHERE version >  '1.0.0';
-SELECT * FROM versions WHERE version <  '1.0.0';
+SELECT * FROM versions WHERE version != '1.0.0';
 SELECT * FROM versions WHERE version <> '1.0.0';
+SELECT * FROM versions WHERE version >  '1.0.0';
+SELECT * FROM versions WHERE version >= '1.0.0';
+SELECT * FROM versions WHERE version <  '1.0.0';
+SELECT * FROM versions WHERE version <= '1.0.0';
 
 SELECT * FROM versions WHERE version =  '2.0.0-alpha';
-SELECT * FROM versions WHERE version >  '2.0.0-alpha';
-SELECT * FROM versions WHERE version <  '2.0.0-alpha';
+SELECT * FROM versions WHERE version != '2.0.0-alpha';
 SELECT * FROM versions WHERE version <> '2.0.0-alpha';
-
+SELECT * FROM versions WHERE version >  '2.0.0-alpha';
+SELECT * FROM versions WHERE version >= '2.0.0-alpha';
+SELECT * FROM versions WHERE version <  '2.0.0-alpha';
+SELECT * FROM versions WHERE version <= '2.0.0-alpha';
 
 SELECT * FROM versions WHERE version > '2.9-beta1';
+
+SELECT * FROM versions WHERE version ~  '2.0.0-alpha';
+SELECT * FROM versions WHERE version !~ '2.0.0-alpha';
+
+SELECT * FROM versions WHERE version ~  '3.0.0-beta2';
+SELECT * FROM versions WHERE version !~ '3.0.0-beta2';
 
 DROP TABLE IF EXISTS versions;
