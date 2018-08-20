@@ -5,21 +5,9 @@ INSERT INTO versions VALUES ('0.0');
 INSERT INTO versions VALUES ('0.1');
 INSERT INTO versions VALUES ('0.0.0');
 INSERT INTO versions VALUES ('0.0.1');
-INSERT INTO versions VALUES ('0.0.1-a');
-INSERT INTO versions VALUES ('0.0.1-alpha');
-INSERT INTO versions VALUES ('0.0.1-a.0');
-INSERT INTO versions VALUES ('0.0.1-a.0.1');
-INSERT INTO versions VALUES ('0.0.1-alpha.0');
-INSERT INTO versions VALUES ('0.0.1-alpha.0.1');
-INSERT INTO versions VALUES ('0.0.1-b');
-INSERT INTO versions VALUES ('0.0.1-beta');
-INSERT INTO versions VALUES ('0.0.1-b.0');
-INSERT INTO versions VALUES ('0.0.1-b.0.1');
-INSERT INTO versions VALUES ('0.0.1-beta.0');
-INSERT INTO versions VALUES ('0.0.1-beta.0.1');
-INSERT INTO versions VALUES ('0.0.1-rc');
-INSERT INTO versions VALUES ('0.0.1-rc.0');
-INSERT INTO versions VALUES ('0.0.1-rc.0.1');
+INSERT INTO versions VALUES ('0.0.1-alpha1');
+INSERT INTO versions VALUES ('0.0.1-beta1');
+INSERT INTO versions VALUES ('0.0.1-rc1');
 INSERT INTO versions VALUES ('!0');
 ERROR:  Invalid Version '!0'. Did you mean '0'
 LINE 1: INSERT INTO versions VALUES ('!0');
@@ -37,42 +25,22 @@ ERROR:  Invalid Version '0.0.%0'. Did you mean '0.0.0'
 LINE 1: INSERT INTO versions VALUES ('0.0.%0');
                                      ^
 INSERT INTO versions VALUES ('0.0.1');
-INSERT INTO versions VALUES ('0.0^.1-a');
-ERROR:  Invalid Version '0.0^.1-a'. Did you mean '0.0.1-a'
-LINE 1: INSERT INTO versions VALUES ('0.0^.1-a');
-                                     ^
 INSERT INTO versions VALUES ('0.&0.1-alpha');
 ERROR:  Invalid Version '0.&0.1-alpha'. Did you mean '0.0.1-alpha'
 LINE 1: INSERT INTO versions VALUES ('0.&0.1-alpha');
                                      ^
-INSERT INTO versions VALUES ('0.0.*1-a.0');
-ERROR:  Invalid Version '0.0.*1-a.0'. Did you mean '0.0.1-a.0'
-LINE 1: INSERT INTO versions VALUES ('0.0.*1-a.0');
-                                     ^
 SELECT * FROM versions;
-     version     
------------------
+   version    
+--------------
  0
  0.0
  0.1
  0.0.0
  0.0.1
- 0.0.1-a
- 0.0.1-alpha
- 0.0.1-a.0
- 0.0.1-a.0.1
- 0.0.1-alpha.0
- 0.0.1-alpha.0.1
- 0.0.1-b
- 0.0.1-beta
- 0.0.1-b.0
- 0.0.1-b.0.1
- 0.0.1-beta.0
- 0.0.1-beta.0.1
- 0.0.1-rc
- 0.0.1-rc.0
- 0.0.1-rc.0.1
+ 0.0.1-alpha1
+ 0.0.1-beta1
+ 0.0.1-rc1
  0.0.1
-(21 rows)
+(9 rows)
 
 DROP TABLE IF EXISTS versions;
