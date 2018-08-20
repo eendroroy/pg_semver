@@ -6,8 +6,8 @@
 #include "semver.c/semver.c"
 
 #define ERR_INVALID_PARAMETER "Invalid Version '%s'."
-#define ERR_INVALID_PARAMETER_MSG "Version '%s' contains invalid characters."
-#define ERR_INVALID_PARAMETER_HINT "Did you mean '%s'."
+#define ERR_INVALID_PARAMETER_MSG "Version '%s' contains invalid character."
+#define ERR_INVALID_PARAMETER_HINT "Did you mean '%s'?"
 
 PG_MODULE_MAGIC;
 

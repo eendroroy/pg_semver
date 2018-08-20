@@ -45,17 +45,17 @@ SELECT VERSION_CMP('1.0.0-rc1*', '1.0.0');
 ERROR:  Invalid Version '1.0.0-rc1*'.
 LINE 1: SELECT VERSION_CMP('1.0.0-rc1*', '1.0.0');
                            ^
-DETAIL:  Version '1.0.0-rc1*' contains invalid characters.
-HINT:  Did you mean '1.0.0-rc1'.
+DETAIL:  Version '1.0.0-rc1*' contains invalid character.
+HINT:  Did you mean '1.0.0-rc1'?
 SELECT VERSION_CMP('1.0.0-rc@1', '1.0.0');
 ERROR:  Invalid Version '1.0.0-rc@1'.
 LINE 1: SELECT VERSION_CMP('1.0.0-rc@1', '1.0.0');
                            ^
-DETAIL:  Version '1.0.0-rc@1' contains invalid characters.
-HINT:  Did you mean '1.0.0-rc1'.
+DETAIL:  Version '1.0.0-rc@1' contains invalid character.
+HINT:  Did you mean '1.0.0-rc1'?
 SELECT VERSION_CMP('1.0.0-rc#1', '1.0.0');
 ERROR:  Invalid Version '1.0.0-rc#1'.
 LINE 1: SELECT VERSION_CMP('1.0.0-rc#1', '1.0.0');
                            ^
-DETAIL:  Version '1.0.0-rc#1' contains invalid characters.
-HINT:  Did you mean '1.0.0-rc1'.
+DETAIL:  Version '1.0.0-rc#1' contains invalid character.
+HINT:  Did you mean '1.0.0-rc1'?
