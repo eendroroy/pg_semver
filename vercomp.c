@@ -189,7 +189,7 @@ Datum version_car(PG_FUNCTION_ARGS) {
     v1 = text_to_cstring(t1);
     v2 = text_to_cstring(t2);
 
-    PG_RETURN_BOOL(version_op(v1, v2, "^"));
+    PG_RETURN_BOOL(version_op(v2, v1, "^"));
 }
 
 PG_FUNCTION_INFO_V1(version_ncar);
@@ -201,5 +201,5 @@ Datum version_ncar(PG_FUNCTION_ARGS) {
     v1 = text_to_cstring(t1);
     v2 = text_to_cstring(t2);
 
-    PG_RETURN_BOOL(!version_op(v1, v2, "^"));
+    PG_RETURN_BOOL(!version_op(v2, v1, "^"));
 }
