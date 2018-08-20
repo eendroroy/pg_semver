@@ -22,9 +22,18 @@ Supported operations:
 - `>=`
 - `<`
 - `<=`
-- `~` [more-info](https://docs.npmjs.com/misc/semver#tilde-ranges-123-12-1)
+- `~`
+```
+  ~1.2.3 := >=1.2.3 <1.(2+1).0 := >=1.2.3 <1.3.0
+  ~0.2.3 := >=0.2.3 <0.(2+1).0 := >=0.2.3 <0.3.0
+```
 - `!~`
-- `^` [more-info](https://docs.npmjs.com/misc/semver#caret-ranges-123-025-004)
+- `^`
+```
+  ^1.2.3 := >=1.2.3 <2.0.0
+  ^0.2.3 := >=0.2.3 <0.3.0
+  ^0.0.3 := >=0.0.0 <0.1.0
+```
 - `!^`
 
 ## Example
@@ -35,8 +44,9 @@ More examples are available in **[test/sql](test/sql)** directory.
 
 CREATE TABLE versions(version VERSION);
 
-INSERT INTO versions VALUES ('1.0.0'), ('0.0.0'), ('2.5.0-beta1'), ('2.0.0-rc1'), ('2.10.0-beta0'), ('20.2.0-alpha'),
-                            ('30.0.0'), ('3.0.0'), ('3.0.0-rc2'), ('3.0.0-rc0'), ('3.0.0-beta2'), ('3.0.0-alpha0');
+INSERT INTO versions VALUES ('1.0.0'), ('0.0.0'), ('2.5.0-beta1'), ('2.0.0-rc1'), ('2.10.0-beta0'), 
+                            ('20.2.0-alpha'), ('30.0.0'), ('3.0.0'), ('3.0.0-rc2'), ('3.0.0-rc0'),
+                            ('3.0.0-beta2'), ('3.0.0-alpha0');
 
 SELECT * FROM versions WHERE version = '1.0.0';
  version 
@@ -94,7 +104,7 @@ SELECT VERSION_CMP('0.0.2', '0.0.1');
 
 ```
 
-**2 version can be also compared without inserting into any table:**
+**2 versions can also be compared without inserting into any table:**
 
 ```sql
 
