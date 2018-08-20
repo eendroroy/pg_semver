@@ -5,7 +5,9 @@
 #include "semver.c/semver.h"
 #include "semver.c/semver.c"
 
-#define ERR_MSG_INVALID_PARAMETER_FMT "Invalid Version '%s'. Did you mean '%s'"
+#define ERR_INVALID_PARAMETER "Invalid Version '%s'."
+#define ERR_INVALID_PARAMETER_MSG "Version '%s' contains invalid characters."
+#define ERR_INVALID_PARAMETER_HINT "Did you mean '%s'."
 
 PG_MODULE_MAGIC;
 
@@ -32,7 +34,14 @@ Datum version_in(PG_FUNCTION_ARGS) {
     if (!semver_is_valid(v1)) {
         strcpy(vc, v1);
         semver_clean(vc);
-        ereport(ERROR, (errcode(ERRCODE_INVALID_PARAMETER_VALUE), errmsg(ERR_MSG_INVALID_PARAMETER_FMT , v1, vc)));
+        ereport(ERROR,
+            (
+                errcode(ERRCODE_INVALID_PARAMETER_VALUE),
+                errmsg(ERR_INVALID_PARAMETER , v1),
+                errdetail(ERR_INVALID_PARAMETER_MSG, v1),
+                errhint(ERR_INVALID_PARAMETER_HINT, vc)
+            )
+        );
     }
     PG_RETURN_CSTRING(t);
 }
@@ -45,7 +54,14 @@ Datum version_out(PG_FUNCTION_ARGS) {
     if (!semver_is_valid(v1)) {
         strcpy(vc, v1);
         semver_clean(vc);
-        ereport(ERROR, (errcode(ERRCODE_INVALID_PARAMETER_VALUE), errmsg(ERR_MSG_INVALID_PARAMETER_FMT , v1, vc)));
+        ereport(ERROR,
+            (
+                errcode(ERRCODE_INVALID_PARAMETER_VALUE),
+                errmsg(ERR_INVALID_PARAMETER , v1),
+                errdetail(ERR_INVALID_PARAMETER_MSG, v1),
+                errhint(ERR_INVALID_PARAMETER_HINT, vc)
+            )
+        );
     }
     PG_RETURN_CSTRING(v1);
 }
@@ -65,13 +81,27 @@ Datum version_cmp(PG_FUNCTION_ARGS) {
     if (!semver_is_valid(v1)) {
         strcpy(vc1, v1);
         semver_clean(vc1);
-        ereport(ERROR, (errcode(ERRCODE_INVALID_PARAMETER_VALUE), errmsg(ERR_MSG_INVALID_PARAMETER_FMT , v1, vc1)));
+        ereport(ERROR,
+            (
+                errcode(ERRCODE_INVALID_PARAMETER_VALUE),
+                errmsg(ERR_INVALID_PARAMETER , v1),
+                errdetail(ERR_INVALID_PARAMETER_MSG, v1),
+                errhint(ERR_INVALID_PARAMETER_HINT, vc1)
+            )
+        );
     }
 
     if (!semver_is_valid(v2)) {
         strcpy(vc2, v2);
         semver_clean(vc2);
-        ereport(ERROR, (errcode(ERRCODE_INVALID_PARAMETER_VALUE), errmsg(ERR_MSG_INVALID_PARAMETER_FMT , v2, vc2)));
+        ereport(ERROR,
+            (
+                errcode(ERRCODE_INVALID_PARAMETER_VALUE),
+                errmsg(ERR_INVALID_PARAMETER , v2),
+                errdetail(ERR_INVALID_PARAMETER_MSG, v2),
+                errhint(ERR_INVALID_PARAMETER_HINT, vc2)
+            )
+        );
     }
 
     semver_parse(v1, &v_1);
