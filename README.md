@@ -40,7 +40,6 @@ Supported operations:
 More examples are available in **[test/sql](test/sql)** directory.
 
 ```sql
-
 CREATE TABLE versions(version VERSION);
 
 INSERT INTO versions VALUES ('1.0.0'), ('0.0.0'), ('2.5.0-beta1'), ('2.0.0-rc1'), ('2.10.0-beta0'), 
@@ -82,24 +81,6 @@ SELECT * FROM versions ORDER BY version DESC;
  1.0.0
  0.0.0
 (12 rows)
-
-SELECT VERSION_CMP('0.0.0', '0.0.1');
- version_cmp 
----------
-      -1
-(1 row)
-
-SELECT VERSION_CMP('0.0.1', '0.0.1');
- version_cmp 
----------
-       0
-(1 row)
-
-SELECT VERSION_CMP('0.0.2', '0.0.1');
- version_cmp 
----------
-       1
-(1 row)
 
 ```
 
