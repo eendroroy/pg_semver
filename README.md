@@ -22,8 +22,10 @@ Supported operations:
 - `>=`
 - `<`
 - `<=`
-- `~`
+- `~` [more-info](https://docs.npmjs.com/misc/semver#tilde-ranges-123-12-1)
 - `!~`
+- `^` [more-info](https://docs.npmjs.com/misc/semver#caret-ranges-123-025-004)
+- `!^`
 
 ## Example
 

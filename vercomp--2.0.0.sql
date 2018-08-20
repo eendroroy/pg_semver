@@ -19,6 +19,8 @@ CREATE FUNCTION version_gt(version, version)   RETURNS boolean AS '$libdir/verco
 CREATE FUNCTION version_ge(version, version)   RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
 CREATE FUNCTION version_sat(version, version)  RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
 CREATE FUNCTION version_nsat(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_car(version, version)  RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_ncar(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
 
 CREATE FUNCTION hash_ver(version) RETURNS int LANGUAGE internal IMMUTABLE AS 'hashtext';
 
@@ -99,6 +101,26 @@ CREATE OPERATOR !~ (
   PROCEDURE = version_nsat,
   COMMUTATOR = !~ ,
   NEGATOR = ~ ,
+  RESTRICT = scalargtsel,
+  JOIN = scalargtjoinsel
+);
+
+CREATE OPERATOR ^ (
+  LEFTARG = version,
+  RIGHTARG = version,
+  PROCEDURE = version_car,
+  COMMUTATOR = ^ ,
+  NEGATOR = !^ ,
+  RESTRICT = scalargtsel,
+  JOIN = scalargtjoinsel
+);
+
+CREATE OPERATOR !^ (
+  LEFTARG = version,
+  RIGHTARG = version,
+  PROCEDURE = version_ncar,
+  COMMUTATOR = !^ ,
+  NEGATOR = ^ ,
   RESTRICT = scalargtsel,
   JOIN = scalargtjoinsel
 );

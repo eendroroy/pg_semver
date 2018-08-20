@@ -178,3 +178,28 @@ Datum version_nsat(PG_FUNCTION_ARGS) {
 
     PG_RETURN_BOOL(!version_op(v1, v2, "~"));
 }
+
+
+PG_FUNCTION_INFO_V1(version_car);
+Datum version_car(PG_FUNCTION_ARGS) {
+    char *v1, *v2;
+    text *t1 = PG_GETARG_TEXT_PP(0);
+    text *t2 = PG_GETARG_TEXT_PP(1);
+
+    v1 = text_to_cstring(t1);
+    v2 = text_to_cstring(t2);
+
+    PG_RETURN_BOOL(version_op(v1, v2, "^"));
+}
+
+PG_FUNCTION_INFO_V1(version_ncar);
+Datum version_ncar(PG_FUNCTION_ARGS) {
+    char *v1, *v2;
+    text *t1 = PG_GETARG_TEXT_PP(0);
+    text *t2 = PG_GETARG_TEXT_PP(1);
+
+    v1 = text_to_cstring(t1);
+    v2 = text_to_cstring(t2);
+
+    PG_RETURN_BOOL(!version_op(v1, v2, "^"));
+}
