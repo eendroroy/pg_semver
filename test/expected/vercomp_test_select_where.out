@@ -224,4 +224,48 @@ SELECT * FROM versions WHERE version !~ '3.0.0-beta2';
  30.0.0
 (7 rows)
 
+SELECT * FROM versions WHERE version ^  '2.0.0-alpha';
+   version    
+--------------
+ 2.5.0-beta1
+ 2.0.0-rc1
+ 2.10.0-beta0
+(3 rows)
+
+SELECT * FROM versions WHERE version !^ '2.0.0-alpha';
+   version    
+--------------
+ 1.0.0
+ 0.0.0
+ 20.2.0-alpha
+ 30.0.0
+ 3.0.0
+ 3.0.0-rc2
+ 3.0.0-rc0
+ 3.0.0-beta2
+ 3.0.0-alpha0
+(9 rows)
+
+SELECT * FROM versions WHERE version ^  '3.0.0-beta2';
+   version    
+--------------
+ 3.0.0
+ 3.0.0-rc2
+ 3.0.0-rc0
+ 3.0.0-beta2
+ 3.0.0-alpha0
+(5 rows)
+
+SELECT * FROM versions WHERE version !^ '3.0.0-beta2';
+   version    
+--------------
+ 1.0.0
+ 0.0.0
+ 2.5.0-beta1
+ 2.0.0-rc1
+ 2.10.0-beta0
+ 20.2.0-alpha
+ 30.0.0
+(7 rows)
+
 DROP TABLE IF EXISTS versions;

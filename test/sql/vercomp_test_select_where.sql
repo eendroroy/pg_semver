@@ -29,4 +29,10 @@ SELECT * FROM versions WHERE version !~ '2.0.0-alpha';
 SELECT * FROM versions WHERE version ~  '3.0.0-beta2';
 SELECT * FROM versions WHERE version !~ '3.0.0-beta2';
 
+SELECT * FROM versions WHERE version ^  '2.0.0-alpha';
+SELECT * FROM versions WHERE version !^ '2.0.0-alpha';
+
+SELECT * FROM versions WHERE version ^  '3.0.0-beta2';
+SELECT * FROM versions WHERE version !^ '3.0.0-beta2';
+
 DROP TABLE IF EXISTS versions;
