@@ -16,7 +16,6 @@ It enables `Version` to be inserted into tables as data type (`CREATE TABLE vers
 
 Supported operations:
 - `=`
-- `!=`
 - `<>`
 - `>`
 - `>=`

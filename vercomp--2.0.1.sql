@@ -128,12 +128,17 @@ CREATE OPERATOR !^ (
 CREATE OPERATOR CLASS btree_ver_ops
 DEFAULT FOR TYPE version USING btree
 AS
-  OPERATOR  1  <  ,
-  OPERATOR  2  <= ,
-  OPERATOR  3  =  ,
-  OPERATOR  4  >= ,
-  OPERATOR  5  >  ,
-  FUNCTION  1  version_cmp(version, version);
+  OPERATOR   1  <  ,
+  OPERATOR   2  <= ,
+  OPERATOR   3  =  ,
+  OPERATOR   4  >= ,
+  OPERATOR   5  >  ,
+  OPERATOR   6  <>  ,
+  OPERATOR   7  ~  ,
+  OPERATOR   8  !~ ,
+  OPERATOR   9  ^  ,
+  OPERATOR  10  !^ ,
+  FUNCTION   1  version_cmp(version, version);
 
 CREATE OPERATOR CLASS hash_ver_ops
   DEFAULT FOR TYPE version USING hash AS
