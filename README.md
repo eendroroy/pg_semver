@@ -10,15 +10,20 @@
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/pulls)
 [![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/pulls?q=is%3Apr+is%3Aclosed)
 
-**`Version`** Data type (`VERSION`) for postgresql. It enables `Version` to be inserted into tables as data type (`CREATE TABLE versions(version VERSION);`) and allows all standard operations (`=`, `>`, `>=`, `<>`, `<`, `<=` etc.).
+**`Version`** Data type (`VERSION`) for postgresql.
+It enables `Version` to be inserted into tables as data type (`CREATE TABLE versions(version VERSION);`)
+and allows all standard operations (`=`, `>`, `>=`, `<>`, `<`, `<=` etc.).
 
 ## Example
+
+More examples are available in **[test/sql](test/sql)** directory.
 
 ```sql
 
 CREATE TABLE versions(version VERSION);
 
-INSERT INTO versions VALUES ('0.0.0'), ('1.0.0'), ('2.0.0-beta1'), ('2.0.0-rc1'),('2.10.0-beta0'), ('2.2.0-alpha'),  ('3.0.0');
+INSERT INTO versions VALUES ('1.0.0'), ('0.0.0'), ('2.5.0-beta1'), ('2.0.0-rc1'), ('2.10.0-beta0'), ('20.2.0-alpha'),
+                            ('30.0.0'), ('3.0.0'), ('3.0.0-rc2'), ('3.0.0-rc0'), ('3.0.0-beta2'), ('3.0.0-alpha0');
 
 SELECT * FROM versions WHERE version = '1.0.0';
  version 
@@ -26,34 +31,35 @@ SELECT * FROM versions WHERE version = '1.0.0';
  1.0.0
 (1 row)
 
-SELECT * FROM versions WHERE version >  '2.0.0-alpha';
-   version    
---------------
- 2.0.0-beta1
- 2.0.0-rc1
- 2.10.0-beta0
- 2.2.0-alpha
- 3.0.0
-(5 rows)
-
 SELECT * FROM versions WHERE version > '2.9-beta1';
    version    
 --------------
  2.10.0-beta0
+ 20.2.0-alpha
+ 30.0.0
  3.0.0
-(2 rows)
+ 3.0.0-rc2
+ 3.0.0-rc0
+ 3.0.0-beta2
+ 3.0.0-alpha0
+(8 rows)
 
 SELECT * FROM versions ORDER BY version DESC;
-   version   
--------------
+   version    
+--------------
+ 30.0.0
+ 20.2.0-alpha
  3.0.0
+ 3.0.0-rc2
+ 3.0.0-rc0
+ 3.0.0-beta2
+ 3.0.0-alpha0
+ 2.10.0-beta0
+ 2.5.0-beta1
  2.0.0-rc1
- 2.0.0-beta1
- 2.0.0-beta0
- 2.0.0-alpha
  1.0.0
  0.0.0
-(7 rows)
+(12 rows)
 
 SELECT VERSION_CMP('0.0.0', '0.0.1');
  version_cmp 
