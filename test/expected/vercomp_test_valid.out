@@ -9,26 +9,36 @@ INSERT INTO versions VALUES ('0.0.1-alpha1');
 INSERT INTO versions VALUES ('0.0.1-beta1');
 INSERT INTO versions VALUES ('0.0.1-rc1');
 INSERT INTO versions VALUES ('!0');
-ERROR:  Invalid Version '!0'. Did you mean '0'
+ERROR:  Invalid Version '!0'.
 LINE 1: INSERT INTO versions VALUES ('!0');
                                      ^
+DETAIL:  Version '!0' contains invalid characters.
+HINT:  Did you mean '0'.
 INSERT INTO versions VALUES ('@0.0');
-ERROR:  Invalid Version '@0.0'. Did you mean '0.0'
+ERROR:  Invalid Version '@0.0'.
 LINE 1: INSERT INTO versions VALUES ('@0.0');
                                      ^
+DETAIL:  Version '@0.0' contains invalid characters.
+HINT:  Did you mean '0.0'.
 INSERT INTO versions VALUES ('0.#1');
-ERROR:  Invalid Version '0.#1'. Did you mean '0.1'
+ERROR:  Invalid Version '0.#1'.
 LINE 1: INSERT INTO versions VALUES ('0.#1');
                                      ^
+DETAIL:  Version '0.#1' contains invalid characters.
+HINT:  Did you mean '0.1'.
 INSERT INTO versions VALUES ('0.0.%0');
-ERROR:  Invalid Version '0.0.%0'. Did you mean '0.0.0'
+ERROR:  Invalid Version '0.0.%0'.
 LINE 1: INSERT INTO versions VALUES ('0.0.%0');
                                      ^
+DETAIL:  Version '0.0.%0' contains invalid characters.
+HINT:  Did you mean '0.0.0'.
 INSERT INTO versions VALUES ('0.0.1');
 INSERT INTO versions VALUES ('0.&0.1-alpha');
-ERROR:  Invalid Version '0.&0.1-alpha'. Did you mean '0.0.1-alpha'
+ERROR:  Invalid Version '0.&0.1-alpha'.
 LINE 1: INSERT INTO versions VALUES ('0.&0.1-alpha');
                                      ^
+DETAIL:  Version '0.&0.1-alpha' contains invalid characters.
+HINT:  Did you mean '0.0.1-alpha'.
 SELECT * FROM versions;
    version    
 --------------
