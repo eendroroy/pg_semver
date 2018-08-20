@@ -12,8 +12,18 @@
 
 **`Version`** Data type (`VERSION`) for postgresql.
 
-It enables `Version` to be inserted into tables as data type (`CREATE TABLE versions(version VERSION);`)
-and allows all standard operations (`=`, `>`, `>=`, `<>`, `<`, `<=` etc.).
+It enables `Version` to be inserted into tables as data type (`CREATE TABLE versions(version VERSION);`).
+
+Supported operations:
+- `=`
+- `!=`
+- `<>`
+- `>`
+- `>=`
+- `<`
+- `<=`
+- `~`
+- `!~`
 
 ## Example
 

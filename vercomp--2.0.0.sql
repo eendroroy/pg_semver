@@ -11,12 +11,14 @@ CREATE CAST (version as text) WITHOUT FUNCTION AS IMPLICIT;
 CREATE FUNCTION version_cmp(version, version) RETURNS int AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
 
 
-CREATE FUNCTION version_eq(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
-CREATE FUNCTION version_ne(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
-CREATE FUNCTION version_lt(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
-CREATE FUNCTION version_le(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
-CREATE FUNCTION version_gt(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
-CREATE FUNCTION version_ge(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_eq(version, version)   RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_ne(version, version)   RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_lt(version, version)   RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_le(version, version)   RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_gt(version, version)   RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_ge(version, version)   RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_sat(version, version)  RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_nsat(version, version) RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
 
 CREATE FUNCTION hash_ver(version) RETURNS int LANGUAGE internal IMMUTABLE AS 'hashtext';
 
@@ -77,6 +79,26 @@ CREATE OPERATOR >= (
   PROCEDURE = version_ge,
   COMMUTATOR = <= ,
   NEGATOR = < ,
+  RESTRICT = scalargtsel,
+  JOIN = scalargtjoinsel
+);
+
+CREATE OPERATOR ~ (
+  LEFTARG = version,
+  RIGHTARG = version,
+  PROCEDURE = version_sat,
+  COMMUTATOR = ~ ,
+  NEGATOR = ~! ,
+  RESTRICT = scalargtsel,
+  JOIN = scalargtjoinsel
+);
+
+CREATE OPERATOR !~ (
+  LEFTARG = version,
+  RIGHTARG = version,
+  PROCEDURE = version_nsat,
+  COMMUTATOR = !~ ,
+  NEGATOR = ~ ,
   RESTRICT = scalargtsel,
   JOIN = scalargtjoinsel
 );
