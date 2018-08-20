@@ -2,11 +2,26 @@ LOAD 'vercomp';
 CREATE TABLE versions(version VERSION);
 INSERT INTO versions VALUES ('0.0.1'), ('0.0.4'), ('0.0.5'), ('0.0.10'),
                             ('0.2.1'), ('0.3.4'), ('0.5.5'), ('0.10.10'),
-                            ('1.2.1'), ('2.3.4'), ('6.5.5'), ('10.10.10');
+                            ('1.2.1'), ('1.3.4'), ('1.5.5'), ('1.10.10'),
+                            ('1.5.1'), ('2.3.4'), ('6.5.5'), ('10.10.10');
 SELECT * FROM versions WHERE version ~  '1.1.1';
  version 
 ---------
 (0 rows)
+
+SELECT * FROM versions WHERE version ~  '0.1.1';
+ version 
+---------
+(0 rows)
+
+SELECT * FROM versions WHERE version ~  '0.0.1';
+ version 
+---------
+ 0.0.1
+ 0.0.4
+ 0.0.5
+ 0.0.10
+(4 rows)
 
 SELECT * FROM versions WHERE version !~ '1.1.1';
  version  
@@ -20,15 +35,14 @@ SELECT * FROM versions WHERE version !~ '1.1.1';
  0.5.5
  0.10.10
  1.2.1
+ 1.3.4
+ 1.5.5
+ 1.10.10
+ 1.5.1
  2.3.4
  6.5.5
  10.10.10
-(12 rows)
-
-SELECT * FROM versions WHERE version ~  '0.1.1';
- version 
----------
-(0 rows)
+(16 rows)
 
 SELECT * FROM versions WHERE version !~ '0.1.1';
  version  
@@ -42,19 +56,14 @@ SELECT * FROM versions WHERE version !~ '0.1.1';
  0.5.5
  0.10.10
  1.2.1
+ 1.3.4
+ 1.5.5
+ 1.10.10
+ 1.5.1
  2.3.4
  6.5.5
  10.10.10
-(12 rows)
-
-SELECT * FROM versions WHERE version ~  '0.0.1';
- version 
----------
- 0.0.1
- 0.0.4
- 0.0.5
- 0.0.10
-(4 rows)
+(16 rows)
 
 SELECT * FROM versions WHERE version !~ '0.0.1';
  version  
@@ -64,9 +73,13 @@ SELECT * FROM versions WHERE version !~ '0.0.1';
  0.5.5
  0.10.10
  1.2.1
+ 1.3.4
+ 1.5.5
+ 1.10.10
+ 1.5.1
  2.3.4
  6.5.5
  10.10.10
-(8 rows)
+(12 rows)
 
 DROP TABLE IF EXISTS versions;
