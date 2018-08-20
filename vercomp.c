@@ -5,9 +5,13 @@
 #include "semver.c/semver.h"
 #include "semver.c/semver.c"
 
-#define ERR_INVALID_PARAMETER "Invalid Version '%s'."
-#define ERR_INVALID_PARAMETER_MSG "Version '%s' contains invalid character."
-#define ERR_INVALID_PARAMETER_HINT "Did you mean '%s'?"
+#define ERR_INVALID_VERSION "Invalid Version '%s'."
+#define ERR_INVALID_VERSION_MSG "Version '%s' contains invalid character."
+#define ERR_INVALID_VERSION_HINT "Did you mean '%s'?"
+
+#define ERR_INVALID_BUMP "Invalid bump number '%d'."
+#define ERR_INVALID_BUMP_MSG "Bump number should be between 0 and 2."
+#define ERR_INVALID_BUMP_HINT "Use bump number between 0 and 2."
 
 PG_MODULE_MAGIC;
 
@@ -37,9 +41,9 @@ Datum version_in(PG_FUNCTION_ARGS) {
         ereport(ERROR,
             (
                 errcode(ERRCODE_INVALID_PARAMETER_VALUE),
-                errmsg(ERR_INVALID_PARAMETER , v1),
-                errdetail(ERR_INVALID_PARAMETER_MSG, v1),
-                errhint(ERR_INVALID_PARAMETER_HINT, vc)
+                errmsg(ERR_INVALID_VERSION , v1),
+                errdetail(ERR_INVALID_VERSION_MSG, v1),
+                errhint(ERR_INVALID_VERSION_HINT, vc)
             )
         );
     }
@@ -57,9 +61,9 @@ Datum version_out(PG_FUNCTION_ARGS) {
         ereport(ERROR,
             (
                 errcode(ERRCODE_INVALID_PARAMETER_VALUE),
-                errmsg(ERR_INVALID_PARAMETER , v1),
-                errdetail(ERR_INVALID_PARAMETER_MSG, v1),
-                errhint(ERR_INVALID_PARAMETER_HINT, vc)
+                errmsg(ERR_INVALID_VERSION , v1),
+                errdetail(ERR_INVALID_VERSION_MSG, v1),
+                errhint(ERR_INVALID_VERSION_HINT, vc)
             )
         );
     }
@@ -84,9 +88,9 @@ Datum version_cmp(PG_FUNCTION_ARGS) {
         ereport(ERROR,
             (
                 errcode(ERRCODE_INVALID_PARAMETER_VALUE),
-                errmsg(ERR_INVALID_PARAMETER , v1),
-                errdetail(ERR_INVALID_PARAMETER_MSG, v1),
-                errhint(ERR_INVALID_PARAMETER_HINT, vc1)
+                errmsg(ERR_INVALID_VERSION , v1),
+                errdetail(ERR_INVALID_VERSION_MSG, v1),
+                errhint(ERR_INVALID_VERSION_HINT, vc1)
             )
         );
     }
@@ -97,9 +101,9 @@ Datum version_cmp(PG_FUNCTION_ARGS) {
         ereport(ERROR,
             (
                 errcode(ERRCODE_INVALID_PARAMETER_VALUE),
-                errmsg(ERR_INVALID_PARAMETER , v2),
-                errdetail(ERR_INVALID_PARAMETER_MSG, v2),
-                errhint(ERR_INVALID_PARAMETER_HINT, vc2)
+                errmsg(ERR_INVALID_VERSION , v2),
+                errdetail(ERR_INVALID_VERSION_MSG, v2),
+                errhint(ERR_INVALID_VERSION_HINT, vc2)
             )
         );
     }
@@ -111,6 +115,55 @@ Datum version_cmp(PG_FUNCTION_ARGS) {
     semver_free(&v_2);
 
     PG_RETURN_INT32((int32)resolution);
+}
+
+PG_FUNCTION_INFO_V1(version_bump);
+Datum version_bump(PG_FUNCTION_ARGS) {
+    char *v1, vc[1000], v2[1000] = {0};
+    semver_t v_1 = {};
+    text *t1 = PG_GETARG_TEXT_PP(0);
+    int32 type = PG_GETARG_INT32(1);
+
+    v1 = text_to_cstring(t1);
+
+    if (!semver_is_valid(v1)) {
+        strcpy(vc, v1);
+        semver_clean(vc);
+        ereport(ERROR,
+            (
+                errcode(ERRCODE_INVALID_PARAMETER_VALUE),
+                errmsg(ERR_INVALID_VERSION , v1),
+                errdetail(ERR_INVALID_VERSION_MSG, v1),
+                errhint(ERR_INVALID_VERSION_HINT, vc)
+            )
+        );
+    }
+
+    semver_parse(v1, &v_1);
+    if (type == 0) {
+        semver_bump(&v_1);
+        semver_render(&v_1, v2);
+        semver_free(&v_1);
+    } else if (type == 1) {
+        semver_bump_minor(&v_1);
+        semver_render(&v_1, v2);
+        semver_free(&v_1);
+    } else if (type == 2) {
+        semver_bump_patch(&v_1);
+        semver_render(&v_1, v2);
+        semver_free(&v_1);
+    } else {
+        ereport(ERROR,
+            (
+                errcode(ERRCODE_INVALID_PARAMETER_VALUE),
+                errmsg(ERR_INVALID_BUMP , type),
+                errdetail(ERR_INVALID_BUMP_MSG),
+                errhint(ERR_INVALID_BUMP_HINT)
+            )
+        );
+    }
+
+    PG_RETURN_CSTRING(cstring_to_text(v2));
 }
 
 PG_FUNCTION_INFO_V1(version_eq);

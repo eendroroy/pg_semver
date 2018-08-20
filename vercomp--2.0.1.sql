@@ -8,7 +8,8 @@ CREATE TYPE version (INPUT = version_in, OUTPUT = version_out, LIKE = TEXT);
 CREATE CAST (text as version) WITHOUT FUNCTION AS IMPLICIT;
 CREATE CAST (version as text) WITHOUT FUNCTION AS IMPLICIT;
 
-CREATE FUNCTION version_cmp(version, version) RETURNS int AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_cmp(version, version) RETURNS int     AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
+CREATE FUNCTION version_bump(version, int)    RETURNS version AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
 
 
 CREATE FUNCTION version_eq(version, version)   RETURNS boolean AS '$libdir/vercomp' LANGUAGE C IMMUTABLE STRICT;
