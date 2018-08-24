@@ -37,7 +37,7 @@ SELECT '0.0.2'::VERSION::INT AS v_to_i;
 
 CREATE TABLE versions(version VERSION);
 INSERT INTO versions VALUES ('0.0.0'), ('0.0.1'), ('0.0.2'), ('0.0.3'), ('1.2.3'), ('1.0.0'), ('1.0.0-alpha.0'),
-                            ('1.0.0-alpha.1'), ('1.0.0-alpha.2'), ('1.0.0-beta'), ('1.0.0-pre'), ('1.0.0-rc');
+                            ('1.0.0-alpha.1'), ('1.0.0-alpha.2'), ('1.0.0-beta.0'), ('1.0.0-pre.1'), ('1.0.0-rc.1');
 SELECT version, version::INT AS v_to_i FROM versions;
     version    | v_to_i 
 ---------------+--------
@@ -50,9 +50,9 @@ SELECT version, version::INT AS v_to_i FROM versions;
  1.0.0-alpha.0 |    613
  1.0.0-alpha.1 |    614
  1.0.0-alpha.2 |    615
- 1.0.0-beta    |    413
- 1.0.0-pre     |    328
- 1.0.0-rc      |    214
+ 1.0.0-beta.0  |    507
+ 1.0.0-pre.1   |    423
+ 1.0.0-rc.1    |    309
 (12 rows)
 
 DROP TABLE IF EXISTS versions;

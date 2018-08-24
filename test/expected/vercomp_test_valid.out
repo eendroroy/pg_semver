@@ -5,9 +5,9 @@ INSERT INTO versions VALUES ('0.0');
 INSERT INTO versions VALUES ('0.1');
 INSERT INTO versions VALUES ('0.0.0');
 INSERT INTO versions VALUES ('0.0.1');
-INSERT INTO versions VALUES ('0.0.1-alpha1');
-INSERT INTO versions VALUES ('0.0.1-beta1');
-INSERT INTO versions VALUES ('0.0.1-rc1');
+INSERT INTO versions VALUES ('0.0.1-alpha.1');
+INSERT INTO versions VALUES ('0.0.1-beta.1');
+INSERT INTO versions VALUES ('0.0.1-rc.1');
 INSERT INTO versions VALUES ('!0');
 ERROR:  Invalid Version '!0'.
 LINE 1: INSERT INTO versions VALUES ('!0');
@@ -33,23 +33,23 @@ LINE 1: INSERT INTO versions VALUES ('0.0.%0');
 DETAIL:  Version '0.0.%0' contains invalid character.
 HINT:  Did you mean '0.0.0'?
 INSERT INTO versions VALUES ('0.0.1');
-INSERT INTO versions VALUES ('0.&0.1-alpha');
-ERROR:  Invalid Version '0.&0.1-alpha'.
-LINE 1: INSERT INTO versions VALUES ('0.&0.1-alpha');
+INSERT INTO versions VALUES ('0.&0.1-alpha.0');
+ERROR:  Invalid Version '0.&0.1-alpha.0'.
+LINE 1: INSERT INTO versions VALUES ('0.&0.1-alpha.0');
                                      ^
-DETAIL:  Version '0.&0.1-alpha' contains invalid character.
-HINT:  Did you mean '0.0.1-alpha'?
+DETAIL:  Version '0.&0.1-alpha.0' contains invalid character.
+HINT:  Did you mean '0.0.1-alpha.0'?
 SELECT * FROM versions;
-   version    
---------------
+    version    
+---------------
  0
  0.0
  0.1
  0.0.0
  0.0.1
- 0.0.1-alpha1
- 0.0.1-beta1
- 0.0.1-rc1
+ 0.0.1-alpha.1
+ 0.0.1-beta.1
+ 0.0.1-rc.1
  0.0.1
 (9 rows)
 
