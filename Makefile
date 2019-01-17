@@ -1,7 +1,7 @@
 EXTENSION  = vercomp
 MODULE_big = ${EXTENSION}
 OBJS       = vercomp.o $(WIN32RES)
-PGFILEDESC = "vercomp - strengthen user password checks"
+PGFILEDESC = "vercomp - compare versions"
 
 DATA  = $(wildcard *--*.sql)
 TESTS = $(wildcard test/sql/*.sql)
