@@ -1,14 +1,14 @@
 # vercomp
 
-[![GitHub tag](https://img.shields.io/github/tag/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/tags)
+[![GitHub tag](https://img.shields.io/github/tag/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/tags)
 
-[![Contributors](https://img.shields.io/github/contributors/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/graphs/contributors)
-[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/eendroroy/vercomp/master.svg)](https://github.com/eendroroy/vercomp)
-[![license](https://img.shields.io/github/license/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/blob/master/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/issues)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/issues?q=is%3Aissue+is%3Aclosed)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/pulls)
-[![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/eendroroy/vercomp.svg)](https://github.com/eendroroy/vercomp/pulls?q=is%3Apr+is%3Aclosed)
+[![Contributors](https://img.shields.io/github/contributors/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/graphs/contributors)
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/eendroroy/pg_vercomp/master.svg)](https://github.com/eendroroy/pg_vercomp)
+[![license](https://img.shields.io/github/license/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/blob/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/issues)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/pulls)
+[![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/pulls?q=is%3Apr+is%3Aclosed)
 
 **`Version`** Data type (`VERSION`) for postgresql.
 
@@ -81,13 +81,11 @@ SELECT * FROM versions ORDER BY version DESC;
  1.0.0
  0.0.0
 (12 rows)
-
 ```
 
 **2 versions can also be compared without inserting into any table:**
 
 ```sql
-
 SELECT VERSION_CMP('0.0.0', '0.0.1');
  version_cmp 
 ---------
@@ -105,7 +103,6 @@ SELECT VERSION_CMP('0.0.2', '0.0.1');
 ---------
        1
 (1 row)
-
 ```
 
 ## Installing by compiling source code
@@ -184,8 +181,7 @@ PATH="/usr/pgsql-10/bin:$PATH" make installcheck
 
 ## Using the module
 
-To enable this module, add '`$libdir/vercomp`' to 
-shared_preload_libraries in postgresql.conf, then restart the server.
+To enable this module, add '`$libdir/vercomp`' to shared_preload_libraries in postgresql.conf, then restart the server.
 
 ## Testing
 
@@ -198,8 +194,15 @@ vagrant provision --provision-with install
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [vercomp](https://github.com/eendroroy/vercomp) repository.
-This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at [pg_vercomp](https://github.com/eendroroy/pg_vercomp) repository.
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the
+[Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+  1. Fork it ( https://github.com/eendroroy/pg_vercomp/fork )
+  1. Create your feature branch (`git checkout -b my-new-feature`)
+  1. Commit your changes (`git commit -am 'Add some feature'`)
+  1. Push to the branch (`git push origin my-new-feature`)
+  1. Create a new Pull Request
 
 ## Author
 
