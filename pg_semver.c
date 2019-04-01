@@ -5,8 +5,8 @@
 #include "semver.c/semver.h"
 #include "semver.c/semver.c"
 
-#define ERR_INVALID_VERSION "Invalid Version '%s'."
-#define ERR_INVALID_VERSION_MSG "Version '%s' contains invalid character."
+#define ERR_INVALID_VERSION "Invalid Semver '%s'."
+#define ERR_INVALID_VERSION_MSG "Semver '%s' contains invalid character."
 #define ERR_INVALID_VERSION_HINT "Did you mean '%s'?"
 
 #define ERR_INVALID_BUMP "Invalid bump number '%d'."
@@ -15,9 +15,9 @@
 
 PG_MODULE_MAGIC;
 
-bool version_op(char *v1, char *v2, char *operator);
+bool pg_semver_op(char *v1, char *v2, char *operator);
 
-bool version_op(char *v1, char *v2, char *operator) {
+bool pg_semver_op(char *v1, char *v2, char *operator) {
     bool resolution;
     semver_t v_1 = {};
     semver_t v_2 = {};
@@ -30,8 +30,8 @@ bool version_op(char *v1, char *v2, char *operator) {
 }
 
 
-PG_FUNCTION_INFO_V1(version_in);
-Datum version_in(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_in);
+Datum pg_semver_in(PG_FUNCTION_ARGS) {
     char vc[1000];
     char *v1 = PG_GETARG_CSTRING(0);
     text *t = cstring_to_text(v1);
@@ -50,8 +50,8 @@ Datum version_in(PG_FUNCTION_ARGS) {
     PG_RETURN_CSTRING(t);
 }
 
-PG_FUNCTION_INFO_V1(version_out);
-Datum version_out(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_out);
+Datum pg_semver_out(PG_FUNCTION_ARGS) {
     char *v1, vc[1000];
     text *t = PG_GETARG_TEXT_PP(0);
     v1 = text_to_cstring(t);
@@ -70,8 +70,8 @@ Datum version_out(PG_FUNCTION_ARGS) {
     PG_RETURN_CSTRING(v1);
 }
 
-PG_FUNCTION_INFO_V1(version_cmp);
-Datum version_cmp(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_cmp);
+Datum pg_semver_cmp(PG_FUNCTION_ARGS) {
     int resolution;
     char *v1, *v2, vc1[1000], vc2[1000];
     semver_t v_1 = {};
@@ -117,8 +117,8 @@ Datum version_cmp(PG_FUNCTION_ARGS) {
     PG_RETURN_INT32((int32)resolution);
 }
 
-PG_FUNCTION_INFO_V1(version_bump);
-Datum version_bump(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_bump);
+Datum pg_semver_bump(PG_FUNCTION_ARGS) {
     char *v1, vc[1000], v2[1000] = {0};
     semver_t v_1 = {};
     text *t1 = PG_GETARG_TEXT_PP(0);
@@ -165,8 +165,8 @@ Datum version_bump(PG_FUNCTION_ARGS) {
 
     PG_RETURN_CSTRING(cstring_to_text(v2));
 }
-PG_FUNCTION_INFO_V1(version_to_int);
-Datum version_to_int(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_to_int);
+Datum pg_semver_to_int(PG_FUNCTION_ARGS) {
     int numeric;
     char *v1, vc[1000];
     semver_t v_1 = {};
@@ -194,8 +194,8 @@ Datum version_to_int(PG_FUNCTION_ARGS) {
     PG_RETURN_INT32((int32)numeric);
 }
 
-PG_FUNCTION_INFO_V1(version_eq);
-Datum version_eq(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_eq);
+Datum pg_semver_eq(PG_FUNCTION_ARGS) {
     char *v1, *v2;
     text *t1 = PG_GETARG_TEXT_PP(0);
     text *t2 = PG_GETARG_TEXT_PP(1);
@@ -203,11 +203,11 @@ Datum version_eq(PG_FUNCTION_ARGS) {
     v1 = text_to_cstring(t1);
     v2 = text_to_cstring(t2);
 
-    PG_RETURN_BOOL(version_op(v1, v2, "="));
+    PG_RETURN_BOOL(pg_semver_op(v1, v2, "="));
 }
 
-PG_FUNCTION_INFO_V1(version_ne);
-Datum version_ne(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_ne);
+Datum pg_semver_ne(PG_FUNCTION_ARGS) {
     char *v1, *v2;
     text *t1 = PG_GETARG_TEXT_PP(0);
     text *t2 = PG_GETARG_TEXT_PP(1);
@@ -215,11 +215,11 @@ Datum version_ne(PG_FUNCTION_ARGS) {
     v1 = text_to_cstring(t1);
     v2 = text_to_cstring(t2);
 
-    PG_RETURN_BOOL(!version_op(v1, v2, "="));
+    PG_RETURN_BOOL(!pg_semver_op(v1, v2, "="));
 }
 
-PG_FUNCTION_INFO_V1(version_lt);
-Datum version_lt(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_lt);
+Datum pg_semver_lt(PG_FUNCTION_ARGS) {
     char *v1, *v2;
     text *t1 = PG_GETARG_TEXT_PP(0);
     text *t2 = PG_GETARG_TEXT_PP(1);
@@ -227,11 +227,11 @@ Datum version_lt(PG_FUNCTION_ARGS) {
     v1 = text_to_cstring(t1);
     v2 = text_to_cstring(t2);
 
-    PG_RETURN_BOOL(version_op(v1, v2, "<"));
+    PG_RETURN_BOOL(pg_semver_op(v1, v2, "<"));
 }
 
-PG_FUNCTION_INFO_V1(version_le);
-Datum version_le(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_le);
+Datum pg_semver_le(PG_FUNCTION_ARGS) {
     char *v1, *v2;
     text *t1 = PG_GETARG_TEXT_PP(0);
     text *t2 = PG_GETARG_TEXT_PP(1);
@@ -239,11 +239,11 @@ Datum version_le(PG_FUNCTION_ARGS) {
     v1 = text_to_cstring(t1);
     v2 = text_to_cstring(t2);
 
-    PG_RETURN_BOOL(version_op(v1, v2, "<="));
+    PG_RETURN_BOOL(pg_semver_op(v1, v2, "<="));
 }
 
-PG_FUNCTION_INFO_V1(version_gt);
-Datum version_gt(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_gt);
+Datum pg_semver_gt(PG_FUNCTION_ARGS) {
     char *v1, *v2;
     text *t1 = PG_GETARG_TEXT_PP(0);
     text *t2 = PG_GETARG_TEXT_PP(1);
@@ -251,11 +251,11 @@ Datum version_gt(PG_FUNCTION_ARGS) {
     v1 = text_to_cstring(t1);
     v2 = text_to_cstring(t2);
 
-    PG_RETURN_BOOL(version_op(v1, v2, ">"));
+    PG_RETURN_BOOL(pg_semver_op(v1, v2, ">"));
 }
 
-PG_FUNCTION_INFO_V1(version_ge);
-Datum version_ge(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_ge);
+Datum pg_semver_ge(PG_FUNCTION_ARGS) {
     char *v1, *v2;
     text *t1 = PG_GETARG_TEXT_PP(0);
     text *t2 = PG_GETARG_TEXT_PP(1);
@@ -263,11 +263,11 @@ Datum version_ge(PG_FUNCTION_ARGS) {
     v1 = text_to_cstring(t1);
     v2 = text_to_cstring(t2);
 
-    PG_RETURN_BOOL(version_op(v1, v2, ">="));
+    PG_RETURN_BOOL(pg_semver_op(v1, v2, ">="));
 }
 
-PG_FUNCTION_INFO_V1(version_sat);
-Datum version_sat(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_sat);
+Datum pg_semver_sat(PG_FUNCTION_ARGS) {
     char *v1, *v2;
     text *t1 = PG_GETARG_TEXT_PP(0);
     text *t2 = PG_GETARG_TEXT_PP(1);
@@ -275,11 +275,11 @@ Datum version_sat(PG_FUNCTION_ARGS) {
     v1 = text_to_cstring(t1);
     v2 = text_to_cstring(t2);
 
-    PG_RETURN_BOOL(version_op(v1, v2, "~"));
+    PG_RETURN_BOOL(pg_semver_op(v1, v2, "~"));
 }
 
-PG_FUNCTION_INFO_V1(version_nsat);
-Datum version_nsat(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_nsat);
+Datum pg_semver_nsat(PG_FUNCTION_ARGS) {
     char *v1, *v2;
     text *t1 = PG_GETARG_TEXT_PP(0);
     text *t2 = PG_GETARG_TEXT_PP(1);
@@ -287,12 +287,12 @@ Datum version_nsat(PG_FUNCTION_ARGS) {
     v1 = text_to_cstring(t1);
     v2 = text_to_cstring(t2);
 
-    PG_RETURN_BOOL(!version_op(v1, v2, "~"));
+    PG_RETURN_BOOL(!pg_semver_op(v1, v2, "~"));
 }
 
 
-PG_FUNCTION_INFO_V1(version_car);
-Datum version_car(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_car);
+Datum pg_semver_car(PG_FUNCTION_ARGS) {
     char *v1, *v2;
     text *t1 = PG_GETARG_TEXT_PP(0);
     text *t2 = PG_GETARG_TEXT_PP(1);
@@ -300,11 +300,11 @@ Datum version_car(PG_FUNCTION_ARGS) {
     v1 = text_to_cstring(t1);
     v2 = text_to_cstring(t2);
 
-    PG_RETURN_BOOL(version_op(v2, v1, "^"));
+    PG_RETURN_BOOL(pg_semver_op(v2, v1, "^"));
 }
 
-PG_FUNCTION_INFO_V1(version_ncar);
-Datum version_ncar(PG_FUNCTION_ARGS) {
+PG_FUNCTION_INFO_V1(pg_semver_ncar);
+Datum pg_semver_ncar(PG_FUNCTION_ARGS) {
     char *v1, *v2;
     text *t1 = PG_GETARG_TEXT_PP(0);
     text *t2 = PG_GETARG_TEXT_PP(1);
@@ -312,5 +312,5 @@ Datum version_ncar(PG_FUNCTION_ARGS) {
     v1 = text_to_cstring(t1);
     v2 = text_to_cstring(t2);
 
-    PG_RETURN_BOOL(!version_op(v2, v1, "^"));
+    PG_RETURN_BOOL(!pg_semver_op(v2, v1, "^"));
 }

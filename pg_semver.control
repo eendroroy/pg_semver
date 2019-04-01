@@ -1,0 +1,5 @@
+# pg_semver extension
+comment = 'pg_semver - add SEMVER data type to postgresql'
+default_version = '0.0.1'
+module_pathname = '$libdir/pg_semver'
+relocatable = true

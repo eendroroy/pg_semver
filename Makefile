@@ -1,12 +1,12 @@
-EXTENSION  = vercomp
+EXTENSION  = pg_semver
 MODULE_big = ${EXTENSION}
-OBJS       = vercomp.o $(WIN32RES)
-PGFILEDESC = "vercomp - compare versions"
+OBJS       = pg_semver.o $(WIN32RES)
+PGFILEDESC = "pg_semver - add SEMVER data type to postgresql"
 
 DATA  = $(wildcard *--*.sql)
 TESTS = $(wildcard test/sql/*.sql)
 
-REGRESS_OPTS  = --inputdir=test --outputdir=test --load-extension=vercomp --user=postgres
+REGRESS_OPTS  = --inputdir=test --outputdir=test --load-extension=pg_semver --user=postgres
 REGRESS       = $(patsubst test/sql/%.sql,%,$(TESTS))
 
 PG_CONFIG = pg_config

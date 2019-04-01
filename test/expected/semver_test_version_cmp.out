@@ -1,0 +1,61 @@
+LOAD 'pg_semver';
+SELECT PG_SEMVER_CMP('0.0.0', '0.0.1');
+ pg_semver_cmp 
+---------------
+            -1
+(1 row)
+
+SELECT PG_SEMVER_CMP('0.0.1', '0.0.1');
+ pg_semver_cmp 
+---------------
+             0
+(1 row)
+
+SELECT PG_SEMVER_CMP('0.0.2', '0.0.1');
+ pg_semver_cmp 
+---------------
+             1
+(1 row)
+
+SELECT PG_SEMVER_CMP('1.0.0-alpha.1', '1.0.0-alpha.0');
+ pg_semver_cmp 
+---------------
+             1
+(1 row)
+
+SELECT PG_SEMVER_CMP('1.0.0-alpha.1', '1.0.0-alpha.2');
+ pg_semver_cmp 
+---------------
+            -1
+(1 row)
+
+SELECT PG_SEMVER_CMP('1.0.0-alpha.1', '1.0.0-beta.2');
+ pg_semver_cmp 
+---------------
+            -1
+(1 row)
+
+SELECT PG_SEMVER_CMP('1.0.0-rc.1', '1.0.0');
+ pg_semver_cmp 
+---------------
+            -1
+(1 row)
+
+SELECT PG_SEMVER_CMP('1.0.0-rc.1*', '1.0.0');
+ERROR:  Invalid Semver '1.0.0-rc.1*'.
+LINE 1: SELECT PG_SEMVER_CMP('1.0.0-rc.1*', '1.0.0');
+                             ^
+DETAIL:  Semver '1.0.0-rc.1*' contains invalid character.
+HINT:  Did you mean '1.0.0-rc.1'?
+SELECT PG_SEMVER_CMP('1.0.0-rc.@1', '1.0.0');
+ERROR:  Invalid Semver '1.0.0-rc.@1'.
+LINE 1: SELECT PG_SEMVER_CMP('1.0.0-rc.@1', '1.0.0');
+                             ^
+DETAIL:  Semver '1.0.0-rc.@1' contains invalid character.
+HINT:  Did you mean '1.0.0-rc.1'?
+SELECT PG_SEMVER_CMP('1.0.0-rc.#1', '1.0.0');
+ERROR:  Invalid Semver '1.0.0-rc.#1'.
+LINE 1: SELECT PG_SEMVER_CMP('1.0.0-rc.#1', '1.0.0');
+                             ^
+DETAIL:  Semver '1.0.0-rc.#1' contains invalid character.
+HINT:  Did you mean '1.0.0-rc.1'?

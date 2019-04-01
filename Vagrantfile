@@ -4,7 +4,7 @@
 Vagrant.configure("2") do |config|
   config.vm.box_check_update = true
 
-  config.vm.synced_folder ".", "/home/vagrant/vercomp"
+  config.vm.synced_folder ".", "/home/vagrant/semver"
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
@@ -52,7 +52,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "install", type: "shell", run: 'never', inline: <<-SHELL
-    cd /home/vagrant/vercomp
+    cd /home/vagrant/semver
     sudo PATH="/usr/pgsql-10/bin:$PATH" make
     sudo PATH="/usr/pgsql-10/bin:$PATH" make install
     sudo PATH="/usr/pgsql-10/bin:$PATH" make installcheck

@@ -1,5 +1,0 @@
-# vercomp extension
-comment = 'vercomp - compare versions'
-default_version = '1.0.0'
-module_pathname = '$libdir/vercomp'
-relocatable = true

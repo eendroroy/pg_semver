@@ -1,6 +1,6 @@
-LOAD 'vercomp';
+LOAD 'pg_semver';
 
-CREATE TABLE versions(version VERSION);
+CREATE TABLE versions(version SEMVER);
 
 INSERT INTO versions VALUES ('0.0.1'), ('0.0.4'), ('0.0.5'), ('0.0.10'),
                             ('0.2.1'), ('0.3.4'), ('0.5.5'), ('0.10.10'),

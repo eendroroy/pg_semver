@@ -1,5 +1,5 @@
-LOAD 'vercomp';
-CREATE TABLE versions(version VERSION);
+LOAD 'pg_semver';
+CREATE TABLE versions(version SEMVER);
 INSERT INTO versions VALUES ('0');
 INSERT INTO versions VALUES ('0.0');
 INSERT INTO versions VALUES ('0.1');
@@ -9,35 +9,35 @@ INSERT INTO versions VALUES ('0.0.1-alpha.1');
 INSERT INTO versions VALUES ('0.0.1-beta.1');
 INSERT INTO versions VALUES ('0.0.1-rc.1');
 INSERT INTO versions VALUES ('!0');
-ERROR:  Invalid Version '!0'.
+ERROR:  Invalid Semver '!0'.
 LINE 1: INSERT INTO versions VALUES ('!0');
                                      ^
-DETAIL:  Version '!0' contains invalid character.
+DETAIL:  Semver '!0' contains invalid character.
 HINT:  Did you mean '0'?
 INSERT INTO versions VALUES ('@0.0');
-ERROR:  Invalid Version '@0.0'.
+ERROR:  Invalid Semver '@0.0'.
 LINE 1: INSERT INTO versions VALUES ('@0.0');
                                      ^
-DETAIL:  Version '@0.0' contains invalid character.
+DETAIL:  Semver '@0.0' contains invalid character.
 HINT:  Did you mean '0.0'?
 INSERT INTO versions VALUES ('0.#1');
-ERROR:  Invalid Version '0.#1'.
+ERROR:  Invalid Semver '0.#1'.
 LINE 1: INSERT INTO versions VALUES ('0.#1');
                                      ^
-DETAIL:  Version '0.#1' contains invalid character.
+DETAIL:  Semver '0.#1' contains invalid character.
 HINT:  Did you mean '0.1'?
 INSERT INTO versions VALUES ('0.0.%0');
-ERROR:  Invalid Version '0.0.%0'.
+ERROR:  Invalid Semver '0.0.%0'.
 LINE 1: INSERT INTO versions VALUES ('0.0.%0');
                                      ^
-DETAIL:  Version '0.0.%0' contains invalid character.
+DETAIL:  Semver '0.0.%0' contains invalid character.
 HINT:  Did you mean '0.0.0'?
 INSERT INTO versions VALUES ('0.0.1');
 INSERT INTO versions VALUES ('0.&0.1-alpha.0');
-ERROR:  Invalid Version '0.&0.1-alpha.0'.
+ERROR:  Invalid Semver '0.&0.1-alpha.0'.
 LINE 1: INSERT INTO versions VALUES ('0.&0.1-alpha.0');
                                      ^
-DETAIL:  Version '0.&0.1-alpha.0' contains invalid character.
+DETAIL:  Semver '0.&0.1-alpha.0' contains invalid character.
 HINT:  Did you mean '0.0.1-alpha.0'?
 SELECT * FROM versions;
     version    

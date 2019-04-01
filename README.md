@@ -1,18 +1,18 @@
-# vercomp
+# PG SEMVER
 
-[![GitHub tag](https://img.shields.io/github/tag/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/tags)
+[![GitHub tag](https://img.shields.io/github/tag/eendroroy/pg_semver.svg)](https://github.com/eendroroy/pg_semver/tags)
 
-[![Contributors](https://img.shields.io/github/contributors/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/graphs/contributors)
-[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/eendroroy/pg_vercomp/master.svg)](https://github.com/eendroroy/pg_vercomp)
-[![license](https://img.shields.io/github/license/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/blob/master/LICENSE)
-[![GitHub issues](https://img.shields.io/github/issues/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/issues)
-[![GitHub closed issues](https://img.shields.io/github/issues-closed/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/issues?q=is%3Aissue+is%3Aclosed)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/pulls)
-[![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/eendroroy/pg_vercomp.svg)](https://github.com/eendroroy/pg_vercomp/pulls?q=is%3Apr+is%3Aclosed)
+[![Contributors](https://img.shields.io/github/contributors/eendroroy/pg_semver.svg)](https://github.com/eendroroy/pg_semver/graphs/contributors)
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/eendroroy/pg_semver/master.svg)](https://github.com/eendroroy/pg_semver)
+[![license](https://img.shields.io/github/license/eendroroy/pg_semver.svg)](https://github.com/eendroroy/pg_semver/blob/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/eendroroy/pg_semver.svg)](https://github.com/eendroroy/pg_semver/issues)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed/eendroroy/pg_semver.svg)](https://github.com/eendroroy/pg_semver/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/eendroroy/pg_semver.svg)](https://github.com/eendroroy/pg_semver/pulls)
+[![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/eendroroy/pg_semver.svg)](https://github.com/eendroroy/pg_semver/pulls?q=is%3Apr+is%3Aclosed)
 
-**`Version`** Data type (`VERSION`) for postgresql.
+**`Version`** Data type (`SEMVER`) for postgresql.
 
-It enables `Version` to be inserted into tables as data type (`CREATE TABLE versions(version VERSION);`).
+It enables `Version` to be inserted into tables as data type (`CREATE TABLE versions(version SEMVER);`).
 
 Supported operations:
 - `=`
@@ -40,7 +40,7 @@ Supported operations:
 More examples are available in **[test/sql](test/sql)** directory.
 
 ```sql
-CREATE TABLE versions(version VERSION);
+CREATE TABLE versions(version SEMVER);
 
 INSERT INTO versions VALUES ('1.0.0'), ('0.0.0'), ('2.5.0-beta1'), ('2.0.0-rc1'), ('2.10.0-beta0'), 
                             ('20.2.0-alpha'), ('30.0.0'), ('3.0.0'), ('3.0.0-rc2'), ('3.0.0-rc0'),
@@ -86,22 +86,22 @@ SELECT * FROM versions ORDER BY version DESC;
 **2 versions can also be compared without inserting into any table:**
 
 ```sql
-SELECT VERSION_CMP('0.0.0', '0.0.1');
- version_cmp 
----------
-      -1
+SELECT PG_SEMVER_CMP('1.0.0-alpha.1', '1.0.0-alpha.2');
+ pg_semver_cmp 
+---------------
+            -1
 (1 row)
 
-SELECT VERSION_CMP('0.0.1', '0.0.1');
- version_cmp 
----------
-       0
+SELECT PG_SEMVER_CMP('0.0.1', '0.0.1');
+ pg_semver_cmp 
+---------------
+             0
 (1 row)
 
-SELECT VERSION_CMP('0.0.2', '0.0.1');
- version_cmp 
----------
-       1
+SELECT PG_SEMVER_CMP('0.0.2', '0.0.1');
+ pg_semver_cmp 
+---------------
+             1
 (1 row)
 ```
 
@@ -181,7 +181,7 @@ PATH="/usr/pgsql-10/bin:$PATH" make installcheck
 
 ## Using the module
 
-To enable this module, add '`$libdir/vercomp`' to shared_preload_libraries in postgresql.conf, then restart the server.
+To enable this module, add '`$libdir/pg_semver`' to shared_preload_libraries in postgresql.conf, then restart the server.
 
 ## Testing
 
@@ -194,11 +194,11 @@ vagrant provision --provision-with install
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at [pg_vercomp](https://github.com/eendroroy/pg_vercomp) repository.
+Bug reports and pull requests are welcome on GitHub at [pg_semver](https://github.com/eendroroy/pg_semver) repository.
 This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the
 [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-  1. Fork it ( https://github.com/eendroroy/pg_vercomp/fork )
+  1. Fork it ( https://github.com/eendroroy/pg_semver/fork )
   1. Create your feature branch (`git checkout -b my-new-feature`)
   1. Commit your changes (`git commit -am 'Add some feature'`)
   1. Push to the branch (`git push origin my-new-feature`)
